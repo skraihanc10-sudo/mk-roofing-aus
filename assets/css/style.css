@@ -108,7 +108,8 @@ p:last-child { margin-bottom: 0; }
 .site-header { background: var(--black); position: sticky; top: 0; z-index: 60; }
 .header-inner { display: flex; align-items: center; gap: 30px; min-height: 92px; }
 .brand { display: flex; align-items: center; gap: 11px; }
-.brand-logo { height: 68px; width: auto; }
+.brand-logo { height: 62px; width: auto; }
+.drawer-logo { height: 50px; width: auto; }
 .brand-fallback { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-fallback .n { font-family: var(--head); font-size: 19px; font-weight: 700; color: #fff; }
 .brand-fallback .t { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
@@ -313,7 +314,7 @@ p:last-child { margin-bottom: 0; }
 .site-footer a:hover { color: #fff; }
 .footer-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .footer-links a.is-active { color: #e2574c; }
-.footer-brand img { height: 78px; width: auto; margin-bottom: 20px; }
+.footer-brand img { height: 118px; width: auto; margin-bottom: 20px; }
 .footer-contact { display: grid; gap: 13px; }
 .footer-contact div { display: flex; gap: 11px; align-items: flex-start; }
 .footer-contact svg { width: 16px; height: 16px; color: #fff; flex: none; margin-top: 5px; }
@@ -380,7 +381,7 @@ p:last-child { margin-bottom: 0; }
   .nav { display: none; }
   .nav-toggle { display: block; }
   .header-inner { min-height: 74px; gap: 12px; }
-  .brand-logo { height: 52px; }
+  .brand-logo { height: 46px; }
   .brand { margin-right: auto; }
   /* keep the wordmark on one line beside the phone button */
   .brand-fallback .n { font-size: 16px; white-space: nowrap; }
@@ -395,4 +396,15 @@ p:last-child { margin-bottom: 0; }
   .header-cta .btn { padding: 10px 16px; font-size: 14px; }
   .band-left { padding: 30px 22px; flex-direction: column; text-align: center; }
   .info-card { padding: 26px 20px; }
+}
+
+@media (max-width: 620px) {
+  .brand-logo { height: 42px; }
+  .header-cta { margin-left: 0; gap: 6px; }
+  .header-cta .btn { padding: 9px 11px; font-size: 12.5px; }
+}
+
+@media (max-width: 480px) {
+  /* Emblem only: the wordmark and the phone CTA stop fitting side by side. */
+  .brand-fallback { display: none; }
 }

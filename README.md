@@ -50,8 +50,9 @@ placeholder rather than a broken image.
 
 | File | Where it appears | Suggested size |
 | --- | --- | --- |
-| `logo.png` | Header and footer | ~400×160, transparent |
-| `favicon.png` | Browser tab | 180×180 square |
+| `logo.png` | Header, footer, mobile menu | supplied — 400×356, transparent |
+| `favicon.png` | Browser tab | supplied — 180×180 square |
+| `og-image.jpg` | Facebook/X/Google link previews | supplied — 1200×630 |
 | `hero.jpg` | Behind the home page headline | 2000×1200, landscape |
 | `about.jpg` | "Get to know" panel | 1200×800 |
 | `band.jpg` | Behind the blue "Years of Experience" strip | 1200×400 |
@@ -61,6 +62,18 @@ placeholder rather than a broken image.
 Service photo filenames follow the slug, so `service-roof-repair.jpg`,
 `service-architectural-design.jpg`, and so on. Run `node build.js` and the
 console tells you how many services there are; the slugs are in `data.js`.
+
+The three logo files are already in place, generated from the badge artwork:
+the blue background was cut away so the emblem sits on the black header and the
+dark footer, and `favicon.png` / `og-image.jpg` keep the brand blue behind it
+because a transparent badge renders badly on whatever ground a browser tab or a
+social card puts behind it. Regenerate them from a new master by trimming to
+the badge and exporting at those sizes.
+
+In the header the emblem sits beside real HTML text rather than standing in for
+it — the wordmark inside the badge is illegible at 62px. Below 480px the text
+is hidden and the emblem stands alone, so it does not collide with the phone
+button.
 
 For the hero, pick something wide with room on the left — the headline sits over
 that side and the image is dimmed behind it.

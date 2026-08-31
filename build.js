@@ -96,7 +96,7 @@ function head({ title, description, canonical, extraHead = '' }) {
 <meta property="og:site_name" content="${attr(BUSINESS.name)}">
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(description)}">
-<meta property="og:image" content="${SITE}/assets/img/logo.png">
+<meta property="og:image" content="${SITE}/assets/img/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
@@ -119,10 +119,10 @@ function header(active) {
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="/" class="brand" aria-label="${attr(BUSINESS.name)} home">
-      <img class="brand-logo" src="/assets/img/logo.png" alt="${attr(BUSINESS.name)}"
-           onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-      <span class="brand-fallback" hidden>
-        <span class="n">MK Roofing LLC</span>
+      ${hasImage('logo.png')
+        ? `<img class="brand-logo" src="/assets/img/logo.png" alt="" width="400" height="356">` : ''}
+      <span class="brand-fallback">
+        <span class="n">${esc(BUSINESS.name)}</span>
         <span class="t">${attr(BUSINESS.city)} &middot; ${attr(BUSINESS.state)}</span>
       </span>
     </a>
@@ -162,7 +162,9 @@ function header(active) {
 
 <div class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-top">
-    <span class="brand-fallback"><span class="n">MK Roofing LLC</span><span class="t">${attr(BUSINESS.city)} &middot; ${attr(BUSINESS.state)}</span></span>
+    ${hasImage('logo.png')
+      ? `<img class="drawer-logo" src="/assets/img/logo.png" alt="${attr(BUSINESS.name)}">`
+      : `<span class="brand-fallback"><span class="n">${esc(BUSINESS.name)}</span><span class="t">${attr(BUSINESS.city)} &middot; ${attr(BUSINESS.state)}</span></span>`}
     <button class="drawer-close" type="button" aria-label="Close menu">&times;</button>
   </div>
   <a href="/">Home</a>
