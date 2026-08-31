@@ -1,7 +1,8 @@
-# MK Roofing AUS — website
+# MK Roofing LLC — website
 
-A rebuild of mkroofingaus.com.au. Static HTML, no framework, no build tooling
-beyond one Node script.
+Static HTML, no framework, no build tooling beyond one Node script. Laid out to
+match the existing mkroofingaus.com.au design so returning visitors recognise
+it, with the business details and services updated.
 
 ```
 node build.js
@@ -52,7 +53,14 @@ placeholder rather than a broken image.
 | `logo.png` | Header and footer | ~400×160, transparent |
 | `favicon.png` | Browser tab | 180×180 square |
 | `hero.jpg` | Behind the home page headline | 2000×1200, landscape |
+| `about.jpg` | "Get to know" panel | 1200×800 |
+| `band.jpg` | Behind the blue "Years of Experience" strip | 1200×400 |
 | `work-1.jpg` … `work-6.jpg` | Recent work grid | 1200×900, 4:3 |
+| `service-<slug>.jpg` | Each service card and detail page | 1200×900, 4:3 |
+
+Service photo filenames follow the slug, so `service-roof-repair.jpg`,
+`service-architectural-design.jpg`, and so on. Run `node build.js` and the
+console tells you how many services there are; the slugs are in `data.js`.
 
 For the hero, pick something wide with room on the left — the headline sits over
 that side and the image is dimmed behind it.
@@ -94,10 +102,20 @@ sitemap and the social preview URLs. It is currently
 
 ---
 
-## Two things to confirm
+## Before this goes live
 
-- **Years in business.** The old site says both *"11 Years of Experience"* and
-  *"Since 2020"*. This build uses `since: 2020` from `data.js` and works the rest
-  out from it. Change that number if 2020 is wrong.
-- **Licence and ABN.** `BUSINESS.abn` is empty. Australian customers look for it,
-  and it is worth having in the footer — fill it in and it can be added.
+Three things in `assets/js/data.js` still need real values.
+
+- **Phone number.** `phone` and `phoneDial` are placeholders,
+  `(505) 000-0000` / `+15050000000`. Every call-to-action on the site points at
+  them, so this is the one that has to change first.
+- **Reviews.** `REVIEWS` is deliberately empty. The two testimonials on the old
+  site are reviews of MK Roofing AUS in Canberra — a different business — so
+  presenting them as reviews of MK Roofing LLC would be misleading, and Google
+  penalises review markup that does not match the entity. Add real ones here as
+  they come in and the section fills itself.
+- **Years in business.** `since: 2020` drives the "Years of Experience" figure in
+  the blue strip. If the LLC started trading on a different date, change it.
+
+Also worth adding once you have them: the state contractor licence number and
+the Google Business Profile link, both of which US customers look for.
