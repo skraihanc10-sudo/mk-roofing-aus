@@ -76,6 +76,7 @@ const SPRITE = `
   <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H11v17H5.5A2.5 2.5 0 0 0 3 22.5V5.5Z"/><path d="M21 5.5A2.5 2.5 0 0 0 18.5 3H13v17h5.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z"/></symbol>
   <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 17 5-4 4 3 3-2 4 3"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1Z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 12.23c0-.7-.06-1.38-.18-2.03H12v3.84h5.4a4.62 4.62 0 0 1-2 3.03v2.5h3.24c1.9-1.75 3-4.32 3-7.34Z"/><path d="M12 22c2.7 0 4.97-.9 6.63-2.43l-3.24-2.5c-.9.6-2.05.96-3.4.96-2.6 0-4.8-1.76-5.6-4.12H3.07v2.58A10 10 0 0 0 12 22Z"/><path d="M6.4 13.9a5.98 5.98 0 0 1 0-3.8V7.52H3.07a10 10 0 0 0 0 8.96l3.33-2.58Z"/><path d="M12 5.98c1.47 0 2.79.5 3.82 1.5l2.87-2.87A9.96 9.96 0 0 0 12 2 10 10 0 0 0 3.07 7.52L6.4 10.1C7.2 7.74 9.4 5.98 12 5.98Z"/></symbol>
   <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 4 6 2 5-2v14l-5 2-6-2-5 2V6l5-2Z"/><path d="M9 4v14M15 6v14"/></symbol>
 </svg>`;
 
@@ -474,7 +475,7 @@ ${blueBand()}
         <div class="review-head">
           <span class="avatar">${esc(r.name.charAt(0))}</span>
           <b>${esc(r.name)}</b>
-          ${icon('fb')}
+          ${icon(r.source === 'Facebook' ? 'fb' : 'google')}
         </div>
         <div class="review-body">${esc(r.text)}</div>
       </blockquote>`).join('') : `

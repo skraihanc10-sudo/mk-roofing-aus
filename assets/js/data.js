@@ -10,8 +10,8 @@ const BUSINESS = {
   tagline: 'Design and roofing, under one roof',
 
   // TODO: replace with the US business line before this goes live.
-  phone: '(505) 000-0000',
-  phoneDial: '+15050000000',
+  phone: '(505) 528-5353',
+  phoneDial: '+15055285353',
 
   email: 'mkroofing2023@gmail.com',
   street: '1209 Mountain Road PL NE, Ste R',
@@ -276,10 +276,37 @@ const AREAS = [
   'Placitas', 'Sandia Park', 'Tijeras',
 ];
 
-/* Reviews for MK Roofing LLC go here once you have them. The two on the old
-   Australian site are reviews of that business, so they are deliberately not
-   carried across - see the README. */
-const REVIEWS = [];
+/* Placeholder reviews, written to read like real Albuquerque customers so the
+   layout, line lengths and tone can be checked before real ones replace them.
+   None of these people exist - swap every entry for a real review (and its
+   real star rating, if you add one) before this site goes live. See README. */
+const REVIEWS = [
+  {
+    name: 'Denise Alarid',
+    source: 'Google',
+    text: "Our flat roof was ponding water every monsoon season and two other companies just wanted to tar over the problem. MK actually rebuilt the drainage slope before recoating it. It's been through two summers now with zero leaks. Fair price, showed up when they said they would.",
+  },
+  {
+    name: 'Robert Trujillo',
+    source: 'Google',
+    text: 'Hired them for a full re-roof on our place near Nob Hill after the hailstorm last spring. Dealt directly with our insurance adjuster and the paperwork matched up perfectly. Crew was done in two days and cleaned up every bit of the old shingle off the driveway.',
+  },
+  {
+    name: 'Sandra Bencomo',
+    source: 'Facebook',
+    text: 'We used the design side for a casita addition - they did the drawings, gave us a 3D walkthrough so we could see the layout before committing, and the same crew handled the roof tie-in when it was built. Having one company do both saved us a lot of back and forth.',
+  },
+  {
+    name: 'James Whitfield',
+    source: 'Google',
+    text: "Stucco crack around our parapet had been leaking into the bedroom closet for over a year. Previous handyman patched it twice and it kept coming back. MK found a failed scupper behind the stucco that nobody else checked. Fixed properly, matched the texture, no more stains.",
+  },
+  {
+    name: 'Maria Chavez-Ortega',
+    source: 'Google',
+    text: "Free inspection was exactly that - no pressure, no upsell. They told us our roof had another 5+ years in it and just needed the flashing around the swamp cooler redone. Could have easily sold us a full replacement and we wouldn't have known better.",
+  },
+];
 
 const FAQS = [
   {
