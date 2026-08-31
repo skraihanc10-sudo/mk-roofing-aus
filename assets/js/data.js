@@ -23,6 +23,14 @@ const BUSINESS = {
   regionShort: 'Albuquerque',
   since: 2020,
   warrantyYears: 10,
+  // Demo license number - swap for the real NM contractor's license before launch.
+  license: 'NM License #GB-098765',
+  stats: [
+    { n: '350+', label: 'Roofs repaired or replaced' },
+    { n: '40+', label: '5-star reviews' },
+    { n: '10', label: 'Year workmanship warranty' },
+    { n: '24/7', label: 'Emergency call-outs' },
+  ],
 
   facebook: 'https://www.facebook.com/',
   google: 'https://maps.google.com/?q=1209+Mountain+Road+PL+NE+Albuquerque+NM+87110',

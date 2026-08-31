@@ -199,6 +199,19 @@ function blueBand() {
 </section>`;
 }
 
+function statsStrip() {
+  return `
+<section class="stats-strip">
+  <div class="wrap stats-grid">
+    ${BUSINESS.stats.map(s => `
+    <div class="stat">
+      <b>${esc(s.n)}</b>
+      <span>${esc(s.label)}</span>
+    </div>`).join('')}
+  </div>
+</section>`;
+}
+
 function footer(active) {
   const on = p => (active === p ? ' class="is-active"' : '');
   return `
@@ -240,6 +253,7 @@ function footer(active) {
           <a href="${attr(BUSINESS.google)}" target="_blank" rel="noopener" aria-label="Google Maps">${icon('map')}</a>
         </div>
         <p>Copyright &copy; ${new Date().getFullYear()} ${esc(BUSINESS.name)}</p>
+        <p>${esc(BUSINESS.license)}</p>
       </div>
     </div>
     <div class="footer-bottom"></div>
@@ -349,6 +363,8 @@ pages['index.html'] = head({
     </div>
   </div>
 </section>
+
+${statsStrip()}
 
 <section class="section">
   <div class="wrap about-grid">

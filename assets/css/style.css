@@ -203,6 +203,12 @@ p:last-child { margin-bottom: 0; }
 
 /* ------------------------------------------------------------- 4-up strip */
 .usp-grid { display: grid; grid-template-columns: repeat(4, 1fr); background: #f2f3f5; }
+
+/* -------------------------------------------------------------- stats strip */
+.stats-strip { background: var(--ink); padding: 40px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+.stat b { display: block; font-family: var(--head); font-size: clamp(28px, 3vw, 38px); font-weight: 700; color: #fff; }
+.stat span { font-size: 14px; color: #b8bfc6; }
 .usp {
   padding: 34px 28px; border-right: 1px dashed #c9ccd0;
 }
@@ -359,6 +365,7 @@ p:last-child { margin-bottom: 0; }
 @media (max-width: 1080px) {
   .card-grid, .copy-grid { grid-template-columns: repeat(2, 1fr); }
   .usp-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .usp:nth-child(2) { border-right: none; }
   .usp:nth-child(-n+2) { border-bottom: 1px dashed #c9ccd0; }
   .hero-grid, .about-grid, .split, .map-grid { grid-template-columns: 1fr; }
