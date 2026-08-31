@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mkroofingaus.com.au/sitemap.xml

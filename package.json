@@ -1,0 +1,14 @@
+{
+  "name": "mk-roofing-aus",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MK Roofing AUS - Canberra roofing website",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js",
+    "dev": "node build.js && node server.js"
+  }
+}
