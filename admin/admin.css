@@ -1,0 +1,204 @@
+/* Admin panel. Deliberately plainer than the public site - this is a tool. */
+
+* { box-sizing: border-box; }
+
+/* .login-screen and the rows below set display, which otherwise beats the
+   hidden attribute and leaves the login form stacked above the dashboard. */
+[hidden] { display: none !important; }
+
+:root {
+  --blue: #2f80c2;
+  --blue-dark: #24659b;
+  --ink: #2b2b2b;
+  --muted: #6b7480;
+  --line: #dfe3e8;
+  --bg: #f4f6f8;
+  --danger: #c0392b;
+  --ok: #1e8449;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+h2, h3 { margin: 0; font-size: 20px; }
+h3.sub-head { margin: 34px 0 6px; font-size: 16px; }
+
+/* ------------------------------------------------------------------- login */
+.login-screen {
+  min-height: 100vh; display: grid; place-items: center; padding: 20px;
+  background: #1b2733;
+}
+.login-box {
+  background: #fff; padding: 34px 30px; border-radius: 10px;
+  width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  display: flex; flex-direction: column;
+}
+.login-logo { height: 86px; width: auto; align-self: center; }
+.login-sub {
+  text-align: center; color: var(--muted); margin: 6px 0 24px;
+  text-transform: uppercase; letter-spacing: .14em; font-size: 11px; font-weight: 600;
+}
+.login-box label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+
+input, textarea, select {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--line);
+  border-radius: 6px; font: inherit; background: #fff; color: inherit;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(47,128,194,.15);
+}
+textarea { resize: vertical; min-height: 76px; }
+
+.login-box button {
+  margin-top: 16px; padding: 11px; border: none; border-radius: 6px;
+  background: var(--blue); color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+}
+.login-box button:hover { background: var(--blue-dark); }
+.error-text { color: var(--danger); font-size: 13.5px; margin: 12px 0 0; }
+
+/* ------------------------------------------------------------------ header */
+.admin-header {
+  background: #000; color: #fff; padding: 0 20px; height: 62px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.admin-brand { display: flex; align-items: center; gap: 11px; font-size: 16px; }
+.admin-brand img { height: 38px; width: auto; }
+.admin-brand b { font-weight: 700; }
+.admin-actions { display: flex; align-items: center; gap: 10px; }
+.btn-ghost {
+  background: none; border: 1px solid #4a5560; color: #fff; padding: 7px 13px;
+  border-radius: 5px; font: inherit; font-size: 13.5px; cursor: pointer; text-decoration: none;
+}
+.btn-ghost:hover { background: #1e2732; }
+.dirty-flag {
+  background: #7a5c00; color: #ffe9a8; font-size: 12px; font-weight: 600;
+  padding: 5px 10px; border-radius: 20px;
+}
+
+/* -------------------------------------------------------------------- tabs */
+.admin-tabs {
+  background: #fff; border-bottom: 1px solid var(--line);
+  display: flex; gap: 2px; padding: 0 12px; overflow-x: auto;
+}
+.admin-tab {
+  background: none; border: none; border-bottom: 3px solid transparent;
+  padding: 14px 16px; font: inherit; font-weight: 600; color: var(--muted);
+  cursor: pointer; white-space: nowrap;
+}
+.admin-tab:hover { color: var(--ink); }
+.admin-tab.is-on { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ------------------------------------------------------------------- panels */
+.admin-main { max-width: 1000px; margin: 0 auto; padding: 26px 20px 80px; }
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap; margin-bottom: 6px;
+}
+.panel-head > div { display: flex; gap: 10px; }
+.panel-note { color: var(--muted); font-size: 14px; margin: 0 0 20px; max-width: 62ch; }
+
+.btn-save, .btn-add {
+  border: none; border-radius: 6px; padding: 9px 16px;
+  font: inherit; font-weight: 600; cursor: pointer;
+}
+.btn-save { background: var(--blue); color: #fff; }
+.btn-save:hover { background: var(--blue-dark); }
+.btn-save:disabled { opacity: .55; cursor: default; }
+.btn-add { background: #fff; color: var(--blue); border: 1px solid var(--blue); }
+.btn-add:hover { background: #eaf3fa; }
+
+/* ------------------------------------------------------------------- forms */
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field.wide { grid-column: 1 / -1; }
+.field label { font-size: 13px; font-weight: 600; }
+.field .hint { font-size: 12.5px; color: var(--muted); }
+
+.row-list { display: grid; gap: 10px; }
+.row {
+  display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px;
+  align-items: center; background: #fff; padding: 10px;
+  border: 1px solid var(--line); border-radius: 7px;
+}
+
+.card-list { display: grid; gap: 14px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.card-head {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  border-bottom: 1px solid var(--line); cursor: pointer;
+}
+.card-head .grip { color: var(--muted); font-size: 13px; }
+.card-head .title { font-weight: 600; flex: 1; }
+.card-head .tag {
+  font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em;
+  background: #eef2f6; color: var(--muted); padding: 3px 8px; border-radius: 20px;
+}
+.card-body { padding: 16px 14px; display: grid; gap: 14px; }
+.card-body[hidden] { display: none; }
+
+.chip-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  display: flex; align-items: center; gap: 6px; background: #fff;
+  border: 1px solid var(--line); border-radius: 20px; padding: 5px 6px 5px 12px;
+}
+.chip input { border: none; padding: 2px; width: 130px; }
+.chip input:focus { box-shadow: none; }
+
+.btn-del {
+  background: none; border: none; color: var(--danger); cursor: pointer;
+  font: inherit; font-size: 13px; padding: 4px 8px; border-radius: 5px;
+}
+.btn-del:hover { background: #fdecea; }
+.btn-move {
+  background: none; border: 1px solid var(--line); color: var(--muted);
+  cursor: pointer; border-radius: 5px; width: 26px; height: 26px; line-height: 1;
+}
+.btn-move:hover { background: #eef2f6; color: var(--ink); }
+.btn-move:disabled { opacity: .3; cursor: default; }
+
+.list-editor { display: grid; gap: 8px; }
+.list-editor .line { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+
+/* ------------------------------------------------------------------ photos */
+.photo-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 16px;
+}
+.photo {
+  background: #fff; border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.photo .frame {
+  aspect-ratio: 4 / 3; background: #eef1f4; display: grid; place-items: center;
+  color: var(--muted); font-size: 12.5px; overflow: hidden;
+}
+.photo .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .meta { padding: 10px 12px; display: grid; gap: 3px; }
+.photo .meta b { font-size: 13.5px; }
+.photo .meta span { font-size: 12px; color: var(--muted); }
+.photo .acts { padding: 0 12px 12px; display: flex; gap: 8px; }
+.photo .acts button {
+  flex: 1; font: inherit; font-size: 13px; padding: 6px; border-radius: 5px;
+  border: 1px solid var(--line); background: #fff; cursor: pointer;
+}
+.photo .acts button:hover { background: #eef2f6; }
+.photo .acts .rm { color: var(--danger); border-color: #f3c9c4; }
+.photo.is-busy { opacity: .5; pointer-events: none; }
+
+/* ------------------------------------------------------------------- toast */
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+  background: #1e2732; color: #fff; padding: 12px 20px; border-radius: 7px;
+  box-shadow: 0 12px 34px rgba(0,0,0,.28); z-index: 50; max-width: 90vw;
+}
+.toast.is-err { background: var(--danger); }
+.toast.is-ok { background: var(--ok); }
+
+@media (max-width: 700px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .row { grid-template-columns: 1fr; }
+  .admin-brand span { display: none; }
+}

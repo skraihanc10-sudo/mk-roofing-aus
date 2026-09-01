@@ -1,21 +1,61 @@
 # MK Roofing LLC — website
 
-Static HTML, no framework, no build tooling beyond one Node script. Laid out to
-match the existing mkroofingaus.com.au design so returning visitors recognise
-it, with the business details and services updated.
+Static HTML with an admin panel bolted on. Laid out to match the existing
+mkroofingaus.com.au design so returning visitors recognise it, with the
+business details and services updated.
 
 ```
-node build.js
+node build.js     # regenerate every .html from content/data.json
+node server.js    # serve it, and run the admin at /admin
 ```
 
-That reads `assets/js/data.js` and writes every `.html` file in the project.
-Run it after any content change, then upload the folder.
+**The pages stay static.** The admin does not render anything at request time:
+it edits `content/data.json`, then re-runs the same `build.js`, which writes
+real `.html` files. Visitors and Google get plain HTML that works with
+JavaScript switched off — which is what lets a local trade site rank at all.
 
 ---
 
-## Adding or changing a service
+## The admin panel
 
-Everything lives in **`assets/js/data.js`**. Add an object to `SERVICES`:
+At **`/admin`**. One password, set as the `ADMIN_PASSWORD` environment
+variable; there are no user accounts. It edits:
+
+| Tab | What it changes |
+| --- | --- |
+| Business | Name, phone, email, address, hours, warranty, license, the numbers strip |
+| Services | Add, edit, reorder and delete services — each one is a whole page |
+| Reviews | Customer reviews, with an optional photo per person |
+| FAQs | The contact page questions, and the FAQ data given to Google |
+| Areas | Suburbs served |
+| Photos | Every picture slot on the site, with previews |
+
+Saving validates, writes the JSON, and rebuilds. **If the rebuild fails the
+save is rolled back**, so a bad edit cannot take the live site down — you get
+an error and the old pages stay up.
+
+Photos publish immediately, no save needed. They are cropped and compressed in
+the browser before upload, so a 6MB phone photo arrives as a ~200KB JPEG and
+nobody has to think about image sizes.
+
+### Deploying it
+
+Set these under Railway → Variables (see `.env.example`):
+
+- `ADMIN_PASSWORD` — without it, `/admin` refuses everyone
+- `SESSION_SECRET` — any long random string; changing it logs you out
+- `DATA_DIR` — **must point at a mounted Volume**, e.g. `/data`
+
+Without a Volume every admin edit is wiped by the next deploy, because the
+container filesystem is thrown away. That is the one setup step that actually
+matters.
+
+---
+
+## Editing content by hand
+
+Everything the admin edits is in **`content/data.json`**. Add an object to
+`services`:
 
 ```js
 {
@@ -35,7 +75,7 @@ the sidebar on every service page, the quote form's dropdown, the sitemap and
 the structured data. Nothing else needs editing.
 
 Deleting a service is the same in reverse — remove the object, rebuild, and
-delete the leftover file in `services/`.
+delete the leftover file in `services/`. The admin panel does both for you.
 
 Phone number, email, address, hours, suburbs, reviews and FAQs are in the same
 file.

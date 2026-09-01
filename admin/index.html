@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | MK Roofing LLC</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div id="login-screen" class="login-screen">
+  <form id="login-form" class="login-box">
+    <img class="login-logo" src="/assets/img/logo.png" alt="MK Roofing LLC">
+    <p class="login-sub">Admin panel</p>
+    <label for="login-password">Password</label>
+    <input type="password" id="login-password" autocomplete="current-password" required>
+    <button type="submit">Log in</button>
+    <p id="login-error" class="error-text" hidden></p>
+  </form>
+</div>
+
+<div id="dashboard" class="dashboard" hidden>
+  <header class="admin-header">
+    <div class="admin-brand">
+      <img src="/assets/img/logo.png" alt="">
+      <span>MK Roofing <b>Admin</b></span>
+    </div>
+    <div class="admin-actions">
+      <span id="dirty-flag" class="dirty-flag" hidden>Unsaved changes</span>
+      <a href="/" target="_blank" rel="noopener" class="btn-ghost">View site &#8599;</a>
+      <button id="logout-btn" class="btn-ghost" type="button">Log out</button>
+    </div>
+  </header>
+
+  <nav class="admin-tabs">
+    <button class="admin-tab is-on" data-tab="business" type="button">Business</button>
+    <button class="admin-tab" data-tab="services" type="button">Services</button>
+    <button class="admin-tab" data-tab="reviews" type="button">Reviews</button>
+    <button class="admin-tab" data-tab="faqs" type="button">FAQs</button>
+    <button class="admin-tab" data-tab="areas" type="button">Areas</button>
+    <button class="admin-tab" data-tab="photos" type="button">Photos</button>
+  </nav>
+
+  <main class="admin-main">
+    <div id="toast" class="toast" hidden></div>
+
+    <section id="tab-business" class="panel">
+      <div class="panel-head">
+        <h2>Business details</h2>
+        <button class="btn-save" type="button" data-save>Save &amp; publish</button>
+      </div>
+      <p class="panel-note">These feed every page at once &mdash; the header, the
+         footer, the contact page and every call button.</p>
+      <div id="business-form" class="form-grid"></div>
+
+      <h3 class="sub-head">Opening hours</h3>
+      <div id="hours-list" class="row-list"></div>
+      <button class="btn-add" type="button" id="add-hours">+ Add a line</button>
+
+      <h3 class="sub-head">Numbers strip</h3>
+      <p class="panel-note">The four figures under the homepage headline.</p>
+      <div id="stats-list" class="row-list"></div>
+      <button class="btn-add" type="button" id="add-stat">+ Add a figure</button>
+    </section>
+
+    <section id="tab-services" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Services</h2>
+        <div>
+          <button class="btn-add" type="button" id="add-service">+ New service</button>
+          <button class="btn-save" type="button" data-save>Save &amp; publish</button>
+        </div>
+      </div>
+      <p class="panel-note">Each one gets its own page, and appears in the menus,
+         the footer, the quote form and the sitemap automatically.</p>
+      <div id="services-list" class="card-list"></div>
+    </section>
+
+    <section id="tab-reviews" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Reviews</h2>
+        <div>
+          <button class="btn-add" type="button" id="add-review">+ New review</button>
+          <button class="btn-save" type="button" data-save>Save &amp; publish</button>
+        </div>
+      </div>
+      <p class="panel-note">Only publish reviews a customer actually left you.</p>
+      <div id="reviews-list" class="card-list"></div>
+    </section>
+
+    <section id="tab-faqs" class="panel" hidden>
+      <div class="panel-head">
+        <h2>FAQs</h2>
+        <div>
+          <button class="btn-add" type="button" id="add-faq">+ New question</button>
+          <button class="btn-save" type="button" data-save>Save &amp; publish</button>
+        </div>
+      </div>
+      <p class="panel-note">Shown on the contact page, and offered to Google as
+         structured data.</p>
+      <div id="faqs-list" class="card-list"></div>
+    </section>
+
+    <section id="tab-areas" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Areas served</h2>
+        <div>
+          <button class="btn-add" type="button" id="add-area">+ Add an area</button>
+          <button class="btn-save" type="button" data-save>Save &amp; publish</button>
+        </div>
+      </div>
+      <p class="panel-note">The first ten fill the "Areas We Serve" menu. All of
+         them are listed for Google.</p>
+      <div id="areas-list" class="chip-list"></div>
+    </section>
+
+    <section id="tab-photos" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Photos</h2>
+      </div>
+      <p class="panel-note">Pick a picture and it is cropped, shrunk and published
+         straight away &mdash; no saving needed on this tab.</p>
+      <div id="photos-list" class="photo-grid"></div>
+    </section>
+  </main>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

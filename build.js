@@ -1,28 +1,36 @@
 /* ---------------------------------------------------------------------------
-   Static site generator. Reads assets/js/data.js and writes real .html files -
+   Static site generator. Reads content/data.json and writes real .html files -
    no framework, no runtime rendering, so every page is crawlable and works
    with JavaScript switched off.
 
      node build.js
 
-   Run it after editing data.js or anything in this file.
+   Also exported as a function so the admin panel can regenerate the site after
+   an edit. That is the whole point: the admin writes JSON, this runs, and what
+   visitors and Google receive is still plain static HTML.
    --------------------------------------------------------------------------- */
 
 const fs = require('fs');
 const path = require('path');
-const vm = require('vm');
 
 const ROOT = __dirname;
-const SITE = 'https://mkroofingllc.com';
+const SITE = process.env.SITE_URL || 'https://mkroofingllc.com';
 
-// ------------------------------------------------------------------ load data
-// data.js uses plain `const` declarations so it can be dropped straight into a
-// page if ever needed. Those do not land on the sandbox object, so evaluate a
-// trailing expression in the same script to hand them back.
-const source = fs.readFileSync(path.join(ROOT, 'assets/js/data.js'), 'utf8');
-const EXPORT = ';({ BUSINESS, SERVICES, AREAS, REVIEWS, FAQS })';
-const { BUSINESS, SERVICES, AREAS, REVIEWS, FAQS } =
-  vm.runInNewContext(source + '\n' + EXPORT);
+function build(opts) {
+const options = opts || {};
+const DATA_FILE = options.dataFile || path.join(ROOT, 'content/data.json');
+const IMG_DIR = options.imagesDir || path.join(ROOT, 'assets/img');
+const OUT_DIR = options.outDir || ROOT;
+
+const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+const BUSINESS = data.business || {};
+const SERVICES = data.services || [];
+const AREAS = data.areas || [];
+const REVIEWS = data.reviews || [];
+const FAQS = data.faqs || [];
+
+// Was a getter while this lived in data.js; JSON cannot carry one.
+BUSINESS.address = BUSINESS.street + ', ' + BUSINESS.city + ', ' + BUSINESS.state + ' ' + BUSINESS.zip;
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const attr = s => esc(s).replace(/"/g, '&quot;');
@@ -34,7 +42,7 @@ const ROOFING = SERVICES.filter(s => s.group === 'roofing');
 // Photos are dropped in by hand, so decide here whether one exists rather than
 // shipping an onerror handler - a placeholder that is part of the markup lays
 // out correctly instead of flashing a broken image first.
-const hasImage = file => fs.existsSync(path.join(ROOT, 'assets/img', file));
+const hasImage = file => fs.existsSync(path.join(IMG_DIR, file));
 
 function photo(file, alt) {
   return hasImage(file)
@@ -887,9 +895,17 @@ pages['robots.txt'] = `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n
 // ------------------------------------------------------------------- write
 let count = 0;
 for (const [file, html] of Object.entries(pages)) {
-  const out = path.join(ROOT, file);
+  const out = path.join(OUT_DIR, file);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, html, 'utf8');
   count++;
 }
-console.log(`Built ${count} files from ${SERVICES.length} services (${DESIGN.length} design, ${ROOFING.length} roofing).`);
+return { files: count, services: SERVICES.length, design: DESIGN.length, roofing: ROOFING.length };
+}
+
+module.exports = build;
+
+if (require.main === module) {
+  const r = build();
+  console.log('Built ' + r.files + ' files from ' + r.services + ' services (' + r.design + ' design, ' + r.roofing + ' roofing).');
+}

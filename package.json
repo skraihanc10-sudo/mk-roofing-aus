@@ -11,5 +11,10 @@
     "start": "node server.js",
     "dev": "node build.js && node server.js",
     "photos": "python prepare-photos.py"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.22.2",
+    "multer": "^2.3.0"
   }
 }
