@@ -1,8 +1,9 @@
 """Turn a folder of downloaded pictures into the site's photo set.
 
-Save whatever you find - Pinterest, a phone, a stock site - into _incoming/
-named by the number from the list below. Extension does not matter, and the
-size does not matter as long as it is big enough. Then:
+Save whatever you find - Pinterest, a phone, a stock site - into _incoming/.
+Name each file either by its number from the list below (1.jpg, 14.png) or by
+the slot's own name (service-roof-repair.jpg). Extension does not matter, and
+neither does the size as long as it is big enough. Then:
 
     python prepare-photos.py
 
@@ -56,8 +57,41 @@ SLOTS = {
 OK_EXT = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif", ".tif", ".tiff", ".avif"}
 
 
+def slot_for(filename):
+    """Which slot does this file belong to, by number or by name?"""
+    stem = filename
+    # Strip every trailing extension: "service-3d-visualization.JPG.png" is one
+    # file people end up with when a download is re-saved.
+    while True:
+        base, ext = os.path.splitext(stem)
+        if ext.lower() in OK_EXT and base:
+            stem = base
+        else:
+            break
+    stem = stem.strip()
+
+    # "7", "7 (1)", "07-roof" all count as slot 7.
+    digits = ""
+    for ch in stem:
+        if ch.isdigit():
+            digits += ch
+        else:
+            break
+    if digits and int(digits) in SLOTS and not stem[len(digits):].strip(" -_()").isalnum():
+        return int(digits)
+
+    key = "".join(c for c in stem.lower() if c.isalnum())
+    for n, (name, _w, _h, _what) in SLOTS.items():
+        if key == "".join(c for c in os.path.splitext(name)[0].lower() if c.isalnum()):
+            return n
+
+    if digits and int(digits) in SLOTS:
+        return int(digits)
+    return None
+
+
 def listing():
-    print("Save your pictures into %s/ named 1, 2, 3 ... like 7.jpg\n" % IN)
+    print("Save your pictures into %s/ named either 1, 2, 3 ... or by the name below.\n" % IN)
     for n in sorted(SLOTS):
         name, w, h, what = SLOTS[n]
         print("  %2d  %-34s %4dx%-5d %s" % (n, name, w, h, what))
@@ -77,25 +111,18 @@ def main():
     found = {}
     ignored = []
     for f in sorted(os.listdir(IN)):
-        stem, ext = os.path.splitext(f)
-        if ext.lower() not in OK_EXT:
+        if os.path.splitext(f)[1].lower() not in OK_EXT:
             continue
-        # "7", "7 (1)", "07-roof" all count as slot 7.
-        digits = ""
-        for ch in stem.strip():
-            if ch.isdigit():
-                digits += ch
-            else:
-                break
-        if not digits or int(digits) not in SLOTS:
+        n = slot_for(f)
+        if n is None:
             ignored.append(f)
             continue
-        found.setdefault(int(digits), os.path.join(IN, f))
+        found.setdefault(n, os.path.join(IN, f))
 
     if not found:
         print("Nothing numbered found in %s/.\n" % IN)
         if ignored:
-            print("These were skipped because they do not start with a number:")
+            print("These were skipped - the name matches no slot:")
             for f in ignored:
                 print("   ", f)
             print()
