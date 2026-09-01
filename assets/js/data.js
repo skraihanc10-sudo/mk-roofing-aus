@@ -314,6 +314,11 @@ const REVIEWS = [
     source: 'Google',
     text: "Free inspection was exactly that - no pressure, no upsell. They told us our roof had another 5+ years in it and just needed the flashing around the swamp cooler redone. Could have easily sold us a full replacement and we wouldn't have known better.",
   },
+  {
+    name: 'Kevin Duran',
+    source: 'Google',
+    text: 'Storm took shingles off the back slope on a Sunday night. Called the emergency line not really expecting an answer and someone was out tarping it before midnight. Permanent repair went in that Thursday and they honoured the number they quoted on the phone.',
+  },
 ];
 
 const FAQS = [

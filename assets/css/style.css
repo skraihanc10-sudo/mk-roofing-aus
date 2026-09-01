@@ -97,6 +97,10 @@ p:last-child { margin-bottom: 0; }
 .btn--blue:hover { background: var(--blue-dark); }
 .btn--outline { border-color: var(--blue); color: var(--blue); background: transparent; }
 .btn--outline:hover { background: var(--blue); color: #fff; }
+.nav a, .nav-trigger, .brand-fallback .n, .brand-fallback .t { white-space: nowrap; }
+.brand { flex: none; }
+.btn--book { border-color: #ffffff; color: #fff; background: transparent; }
+.btn--book:hover { background: #fff; color: var(--black); }
 .btn--white { background: #fff; color: var(--blue); }
 .btn--white:hover { background: #f0f0f0; }
 .btn--pill { border-radius: 100px; padding: 14px 30px; }
@@ -342,8 +346,12 @@ p:last-child { margin-bottom: 0; }
 .tick-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
 .tick-list svg { width: 19px; height: 19px; color: var(--blue); flex: none; margin-top: 5px; }
 
+.prose { max-width: 760px; }
 .prose h2 { margin-top: 40px; }
 .prose h2:first-child { margin-top: 0; }
+.prose h3 { margin-top: 34px; margin-bottom: 10px; }
+.prose h3:first-of-type { margin-top: 30px; }
+.prose p { margin-bottom: 16px; }
 
 /* contact page info card */
 .info-card { background: #f7f8f9; padding: 34px 30px; }
@@ -363,6 +371,11 @@ p:last-child { margin-bottom: 0; }
 .to-top svg { width: 18px; height: 18px; }
 
 /* ------------------------------------------------------------- breakpoints */
+@media (max-width: 1400px) {
+  /* First thing to go when the header runs out of room. */
+  .btn--book { display: none; }
+}
+
 @media (max-width: 1080px) {
   .card-grid, .copy-grid { grid-template-columns: repeat(2, 1fr); }
   .usp-grid { grid-template-columns: repeat(2, 1fr); }

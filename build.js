@@ -152,6 +152,7 @@ function header(active) {
     </nav>
 
     <div class="header-cta">
+      <a href="/contact.html" class="btn btn--book">Book Appointment Now</a>
       <a href="${telHref}" class="btn btn--blue">${icon('phone')} ${esc(BUSINESS.phone)}</a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -231,6 +232,7 @@ function footer(active) {
         <ul class="footer-links">
           <li><a href="/contact.html"${on('contact')}>Contact</a></li>
           <li><a href="/about.html"${on('about')}>About</a></li>
+          <li><a href="/privacy-policy.html"${on('privacy')}>Privacy Policy</a></li>
           <li><a href="/services.html"${on('services')}>Services</a></li>
           <li><a href="/contact.html#faq">FAQs</a></li>
         </ul>
@@ -785,6 +787,70 @@ pages['contact.html'] = head({
 ${blueBand()}
 ` + footer('contact');
 
+/* ------------------------------------------------------------ privacy */
+// Boilerplate wording. It describes what this site actually does today - one
+// form, no analytics, no cookies - so it stays honest until a tracker is added.
+pages['privacy-policy.html'] = head({
+  title: `Privacy Policy | ${BUSINESS.name}`,
+  description: `How ${BUSINESS.name} collects, uses and protects the details you send through this website.`,
+  canonical: '/privacy-policy.html',
+}) + header('privacy') + `
+<a id="top"></a>
+<div class="page-head">
+  <div class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="crumb"><a href="/">Home</a> / Privacy Policy</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap prose">
+    <p class="lede">This policy explains what ${esc(BUSINESS.name)} does with the information you
+       send us through this website. Last updated ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.</p>
+
+    <h3>What we collect</h3>
+    <p>Only what you type into a quote or booking form: your name, phone number, email address,
+       property address and whatever you tell us about the job. We do not ask for payment details
+       anywhere on this site, and we never will by email.</p>
+
+    <h3>What we do with it</h3>
+    <p>We use it to answer your enquiry &mdash; to call you back, book an inspection, and prepare a
+       quote. That is all. We do not sell it, rent it, or pass it to marketing companies. We share
+       it with someone else only where a job genuinely requires it, such as a supplier quoting on
+       materials for your roof, or where the law requires us to.</p>
+
+    <h3>How long we keep it</h3>
+    <p>Enquiries that do not turn into work are deleted once they are clearly closed. Records of
+       completed jobs are kept for as long as the ${BUSINESS.warrantyYears}-year workmanship
+       warranty runs, plus whatever period tax and insurance rules require, because we need them to
+       honour a warranty claim.</p>
+
+    <h3>Cookies and tracking</h3>
+    <p>This site sets no cookies and runs no analytics or advertising trackers. The only third-party
+       content on any page is the Google Maps panel on our contact page; when it loads, Google
+       receives your IP address under its own privacy policy. Nothing else about your visit is
+       recorded.</p>
+
+    <h3>Your choices</h3>
+    <p>You can ask us what we hold about you, ask us to correct it, or ask us to delete it. Call
+       ${esc(BUSINESS.phone)} or email ${esc(BUSINESS.email)} and we will action it. There is no
+       mailing list on this site, so there is nothing to unsubscribe from.</p>
+
+    <h3>Security</h3>
+    <p>This site is served over HTTPS. No customer information is stored on the website itself
+       &mdash; form submissions go straight to our inbox.</p>
+
+    <h3>Contact</h3>
+    <p>${esc(BUSINESS.name)}<br>
+       ${esc(BUSINESS.street)}<br>
+       ${esc(BUSINESS.city)}, ${esc(BUSINESS.state)} ${esc(BUSINESS.zip)}<br>
+       ${esc(BUSINESS.phone)} &middot; ${esc(BUSINESS.email)}</p>
+  </div>
+</section>
+
+${blueBand()}
+` + footer('privacy');
+
 /* ----------------------------------------------------------- 404 + sitemap */
 pages['404.html'] = head({
   title: `Page not found | ${BUSINESS.name}`,
@@ -805,7 +871,7 @@ pages['404.html'] = head({
 </section>
 ` + footer('');
 
-const urls = ['/', '/services.html', '/about.html', '/contact.html']
+const urls = ['/', '/services.html', '/about.html', '/contact.html', '/privacy-policy.html']
   .concat(SERVICES.map(s => `/services/${s.slug}.html`));
 
 pages['sitemap.xml'] = `<?xml version="1.0" encoding="UTF-8"?>
