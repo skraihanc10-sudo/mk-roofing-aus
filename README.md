@@ -59,6 +59,24 @@ placeholder rather than a broken image.
 | `work-1.jpg` … `work-6.jpg` | Recent work grid | 1200×900, 4:3 |
 | `service-<slug>.jpg` | Each service card and detail page | 1200×900, 4:3 |
 
+The 13 service filenames in full:
+
+```
+service-architectural-design.jpg     Architectural Design
+service-3d-visualization.jpg         3D Visualization
+service-interior-planning.jpg        Interior Planning
+service-roof-inspection.jpg          Roof Inspection
+service-roof-repair.jpg              Roof Repair
+service-roof-replacement.jpg         Roof Replacement
+service-roof-restoration.jpg         Roof Restoration
+service-roof-leak-repair.jpg         Roof Leak Repair
+service-flat-roof-coating.jpg        Flat Roof & Coating
+service-metal-roofing.jpg            Metal Roofing
+service-gutter-fascia.jpg            Gutter & Fascia
+service-stucco-parapet-repair.jpg    Stucco & Parapet Repair
+service-pergola.jpg                  Pergola & Patio Covers
+```
+
 Service photo filenames follow the slug, so `service-roof-repair.jpg`,
 `service-architectural-design.jpg`, and so on. Run `node build.js` and the
 console tells you how many services there are; the slugs are in `data.js`.
