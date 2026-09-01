@@ -4,3 +4,6 @@ Thumbs.db
 *.log
 .env
 .env.*
+
+# Raw photo drops - only the processed versions in assets/img/ belong in git
+_incoming/

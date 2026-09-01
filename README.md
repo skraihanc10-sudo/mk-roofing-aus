@@ -46,7 +46,21 @@ file.
 
 Drop these into `assets/img/`. The build checks which exist and only writes an
 `<img>` for the ones that are there — anything missing shows a labelled
-placeholder rather than a broken image.
+placeholder rather than a broken image. A half-finished set is safe to publish.
+
+**The easy way.** Do not crop or rename anything by hand. Save whatever you
+find into `_incoming/` named by number — `1.jpg`, `2.png`, `14.jpeg` — then:
+
+```
+python prepare-photos.py
+```
+
+It centre-crops each one to the right shape, resizes, compresses, and writes it
+under the name the build expects. It also tells you which numbers are still
+missing and warns when a source was too small to look sharp. `python
+prepare-photos.py --list` prints the numbering. `_incoming/` is gitignored, so
+originals stay off the repo.
+
 
 | File | Where it appears | Suggested size |
 | --- | --- | --- |
