@@ -143,7 +143,7 @@ Two things to set up on whichever host you choose:
 
 `SITE` at the top of `build.js` sets the domain used in canonical tags, the
 sitemap and the social preview URLs. It is currently
-`https://mkroofingaus.com.au`.
+`https://mkroofingllc.com`.
 
 ---
 

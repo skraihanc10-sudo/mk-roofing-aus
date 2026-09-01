@@ -13,7 +13,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = __dirname;
-const SITE = 'https://mkroofingaus.com.au';
+const SITE = 'https://mkroofingllc.com';
 
 // ------------------------------------------------------------------ load data
 // data.js uses plain `const` declarations so it can be dropped straight into a
