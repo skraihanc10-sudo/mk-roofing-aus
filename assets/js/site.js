@@ -54,7 +54,7 @@
   // Set FORM_ENDPOINT to a Formspree/Netlify/Web3Forms URL and they will POST
   // instead - see README.
   var FORM_ENDPOINT = '';
-  var MAILTO = 'mkroofing2023@gmail.com';
+  var MAILTO = 'mkroofingllc1@gmail.com';
 
   document.querySelectorAll('form[id$="form"]').forEach(function (form) {
     var status = document.getElementById('status-' + form.id);

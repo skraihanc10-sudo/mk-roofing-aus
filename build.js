@@ -490,10 +490,12 @@ ${blueBand()}
       <h2>What our customers say</h2>
     </div>
     <div class="review-grid">
-      ${REVIEWS.length ? REVIEWS.map(r => `
+      ${REVIEWS.length ? REVIEWS.map((r, i) => `
       <blockquote class="review">
         <div class="review-head">
-          <span class="avatar">${esc(r.name.charAt(0))}</span>
+          ${hasImage(`review-${i + 1}.jpg`)
+            ? `<img class="avatar" src="/assets/img/review-${i + 1}.jpg" alt="" width="88" height="88" loading="lazy">`
+            : `<span class="avatar">${esc(r.name.charAt(0))}</span>`}
           <b>${esc(r.name)}</b>
           ${icon(r.source === 'Facebook' ? 'fb' : 'google')}
         </div>

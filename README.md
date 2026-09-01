@@ -157,8 +157,14 @@ All of it lives in `assets/js/data.js`.
   number the client asked to go live with, so it is already real. If that
   changes, update `phone` and `phoneDial`; every call-to-action on the site
   reads from them.
-- **Email.** `mkroofing2023@gmail.com` is a demo address, kept from the old
-  site. Confirm the real inbox before launch.
+- **Email.** `mkroofingllc1@gmail.com`. Confirm someone actually watches this
+  inbox before launch - with no form backend, every enquiry lands there and
+  nowhere else.
+- **Reviewer portraits.** Slots 23-28 (`review-1.jpg` ... `review-6.jpg`) put a
+  face on each review card; without one it falls back to the person's initial.
+  A stock or generated face beside a name that is not that person's is worse
+  than no photo - it puts a stranger's likeness behind words they never said.
+  Use real customer photos, with their permission, or leave the initials.
 - **Reviews.** `REVIEWS` holds five demo entries written to sound like real
   Albuquerque customers - none of these five people exist. The two
   testimonials on the old site are reviews of MK Roofing AUS in Canberra, a

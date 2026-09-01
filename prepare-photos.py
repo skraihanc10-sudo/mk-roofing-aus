@@ -52,6 +52,15 @@ SLOTS = {
     20: ("service-gutter-fascia.jpg",         1200, 900, "Gutter & Fascia"),
     21: ("service-stucco-parapet-repair.jpg", 1200, 900, "Stucco & Parapet Repair"),
     22: ("service-pergola.jpg",               1200, 900, "Pergola & Patio Covers"),
+
+    # Reviewer portraits, in the order REVIEWS appears in data.js. Square, and
+    # shown as a small circle - a head-and-shoulders shot works, a wide one does not.
+    23: ("review-1.jpg", 400, 400, "Review 1 - Denise Alarid"),
+    24: ("review-2.jpg", 400, 400, "Review 2 - Robert Trujillo"),
+    25: ("review-3.jpg", 400, 400, "Review 3 - Sandra Bencomo"),
+    26: ("review-4.jpg", 400, 400, "Review 4 - James Whitfield"),
+    27: ("review-5.jpg", 400, 400, "Review 5 - Maria Chavez-Ortega"),
+    28: ("review-6.jpg", 400, 400, "Review 6 - Kevin Duran"),
 }
 
 OK_EXT = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif", ".tif", ".tiff", ".avif"}
