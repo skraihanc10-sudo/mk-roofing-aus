@@ -27,7 +27,11 @@ const cookieParser = require('cookie-parser');
 const build = require('./build');
 
 const APP_DIR = __dirname;
-const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : APP_DIR;
+// Railway sets RAILWAY_VOLUME_MOUNT_PATH the moment a Volume is attached, so
+// picking it up means the volume is the only thing to configure - one fewer
+// setting to get wrong, and getting it wrong silently loses every admin edit.
+const VOLUME = process.env.DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || '';
+const DATA_DIR = VOLUME ? path.resolve(VOLUME) : APP_DIR;
 const CONTENT_DIR = path.join(DATA_DIR, 'content');
 const IMAGES_DIR = DATA_DIR === APP_DIR
   ? path.join(APP_DIR, 'assets/img')          // local: edit the repo's own photos
@@ -315,4 +319,10 @@ app.listen(PORT, () => {
   console.log('  data:  ' + DATA_DIR);
   console.log('  pages: ' + (lastBuild ? lastBuild.files + ' built' : 'BUILD FAILED'));
   if (!ADMIN_PASSWORD) console.warn('  WARNING: ADMIN_PASSWORD is not set - /admin will refuse everyone.');
+  if (DATA_DIR === APP_DIR && process.env.RAILWAY_ENVIRONMENT) {
+    console.warn('  WARNING: no Volume attached - every admin edit will be lost on the next deploy.');
+  }
+  if (SESSION_SECRET === 'dev-only-secret-change-me' && process.env.RAILWAY_ENVIRONMENT) {
+    console.warn('  WARNING: SESSION_SECRET is still the default - set it under Variables.');
+  }
 });

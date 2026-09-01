@@ -44,11 +44,14 @@ Set these under Railway → Variables (see `.env.example`):
 
 - `ADMIN_PASSWORD` — without it, `/admin` refuses everyone
 - `SESSION_SECRET` — any long random string; changing it logs you out
-- `DATA_DIR` — **must point at a mounted Volume**, e.g. `/data`
+
+Then **attach a Volume** (Railway → the service → Volumes). Its mount path is
+picked up automatically, so there is no third variable to set. `DATA_DIR`
+exists only to override that.
 
 Without a Volume every admin edit is wiped by the next deploy, because the
-container filesystem is thrown away. That is the one setup step that actually
-matters.
+container filesystem is thrown away. It is the one step that actually matters,
+so the server logs a warning on boot if it is missing.
 
 ---
 
