@@ -55,12 +55,12 @@ SLOTS = {
 
     # Reviewer portraits, in the order REVIEWS appears in data.js. Square, and
     # shown as a small circle - a head-and-shoulders shot works, a wide one does not.
-    23: ("review-1.jpg", 400, 400, "Review 1 - Denise Alarid"),
-    24: ("review-2.jpg", 400, 400, "Review 2 - Robert Trujillo"),
-    25: ("review-3.jpg", 400, 400, "Review 3 - Sandra Bencomo"),
-    26: ("review-4.jpg", 400, 400, "Review 4 - James Whitfield"),
-    27: ("review-5.jpg", 400, 400, "Review 5 - Maria Chavez-Ortega"),
-    28: ("review-6.jpg", 400, 400, "Review 6 - Kevin Duran"),
+    23: ("review-1.jpg", 400, 400, "Review 1 - Denise Alarid (woman)"),
+    24: ("review-2.jpg", 400, 400, "Review 2 - Robert Trujillo (man)"),
+    25: ("review-3.jpg", 400, 400, "Review 3 - Sandra Bencomo (woman)"),
+    26: ("review-4.jpg", 400, 400, "Review 4 - James Whitfield (man)"),
+    27: ("review-5.jpg", 400, 400, "Review 5 - Ruben Chavez-Ortega (man)"),
+    28: ("review-6.jpg", 400, 400, "Review 6 - Kevin Duran (man)"),
 }
 
 OK_EXT = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif", ".tif", ".tiff", ".avif"}

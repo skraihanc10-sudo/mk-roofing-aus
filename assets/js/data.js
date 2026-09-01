@@ -310,7 +310,7 @@ const REVIEWS = [
     text: "Stucco crack around our parapet had been leaking into the bedroom closet for over a year. Previous handyman patched it twice and it kept coming back. MK found a failed scupper behind the stucco that nobody else checked. Fixed properly, matched the texture, no more stains.",
   },
   {
-    name: 'Maria Chavez-Ortega',
+    name: 'Ruben Chavez-Ortega',
     source: 'Google',
     text: "Free inspection was exactly that - no pressure, no upsell. They told us our roof had another 5+ years in it and just needed the flashing around the swamp cooler redone. Could have easily sold us a full replacement and we wouldn't have known better.",
   },
