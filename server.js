@@ -292,18 +292,49 @@ app.use((req, res, next) => {
   next();
 });
 
+// Pages are linked without the .html, but the files on disk keep it and Google
+// has already indexed the old form. Send one to the other permanently so the
+// two are not treated as duplicate pages competing with each other.
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  if (!req.path.endsWith('.html') || req.path.startsWith('/admin')) return next();
+  const clean = req.path === '/index.html'
+    ? '/'
+    : req.path.replace(/(\/index)?\.html$/, '');
+  const query = req.originalUrl.slice(req.path.length);   // keeps ?a=b#c
+  return res.redirect(301, clean + query);
+});
+
 app.use('/admin', express.static(path.join(APP_DIR, 'admin'), { maxAge: 0 }));
 // Uploaded photos win over the ones in the checkout.
 app.use('/assets/img', express.static(IMAGES_DIR, { maxAge: '7d' }));
 app.use('/assets', express.static(path.join(APP_DIR, 'assets'), { maxAge: '7d' }));
 
+// Resolve a clean URL to its file explicitly, rather than leaning on
+// express.static's `extensions`. That option loses to a directory of the same
+// name: /services is both services.html and the services/ folder, and static
+// picks the folder, finds no index.html there, and 404s a main nav link.
+function servePage(dir) {
+  return (req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+    const rel = decodeURIComponent(req.path).replace(/^\/+/, '');
+    if (!rel || path.extname(rel)) return next();
+    const file = path.join(dir, rel + '.html');
+    if (!file.startsWith(dir) || !fs.existsSync(file)) return next();
+    res.set('Cache-Control', 'public, max-age=0, must-revalidate');
+    return res.sendFile(file);
+  };
+}
+
 // Pages change on every rebuild, so they revalidate; assets are cached hard.
+app.use(servePage(SITE_DIR));
 app.use(express.static(SITE_DIR, { extensions: ['html'], maxAge: 0, redirect: false }));
 
 // Fall back to the pages committed to the repo. This only matters when a boot
 // build has failed - without it the site would serve nothing at all rather
 // than slightly stale pages. Source files are already blocked above.
 if (SITE_DIR !== APP_DIR) {
+  app.use(servePage(APP_DIR));
   app.use(express.static(APP_DIR, { extensions: ['html'], maxAge: 0, redirect: false }));
 }
 

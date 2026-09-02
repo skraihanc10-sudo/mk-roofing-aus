@@ -121,7 +121,7 @@ ${extraHead}
 function header(active) {
   const on = p => (active === p ? ' class="is-active"' : '');
   const links = list => list.map(s =>
-    `<a href="/services/${s.slug}.html">${esc(s.name)}</a>`).join('\n          ');
+    `<a href="/services/${s.slug}">${esc(s.name)}</a>`).join('\n          ');
 
   return `
 <header class="site-header">
@@ -152,15 +152,15 @@ function header(active) {
       <span class="has-menu">
         <button class="nav-trigger" type="button" aria-haspopup="true">Areas We Serve ${icon('chev')}</button>
         <span class="nav-menu">
-          ${AREAS.slice(0, 10).map(a => `<a href="/contact.html">${esc(a)}</a>`).join('\n          ')}
+          ${AREAS.slice(0, 10).map(a => `<a href="/contact">${esc(a)}</a>`).join('\n          ')}
         </span>
       </span>
-      <a href="/about.html"${on('about')}>About</a>
-      <a href="/contact.html"${on('contact')}>Contact</a>
+      <a href="/about"${on('about')}>About</a>
+      <a href="/contact"${on('contact')}>Contact</a>
     </nav>
 
     <div class="header-cta">
-      <a href="/contact.html" class="btn btn--book">Book Appointment Now</a>
+      <a href="/contact" class="btn btn--book">Book Appointment Now</a>
       <a href="${telHref}" class="btn btn--blue">${icon('phone')} ${esc(BUSINESS.phone)}</a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -178,12 +178,12 @@ function header(active) {
   </div>
   <a href="/">Home</a>
   <div class="grp">Design</div>
-  ${DESIGN.map(s => `<a class="sub" href="/services/${s.slug}.html">${esc(s.name)}</a>`).join('\n  ')}
+  ${DESIGN.map(s => `<a class="sub" href="/services/${s.slug}">${esc(s.name)}</a>`).join('\n  ')}
   <div class="grp">Roofing</div>
-  ${ROOFING.map(s => `<a class="sub" href="/services/${s.slug}.html">${esc(s.name)}</a>`).join('\n  ')}
-  <a href="/services.html">All Services</a>
-  <a href="/about.html">About</a>
-  <a href="/contact.html">Contact</a>
+  ${ROOFING.map(s => `<a class="sub" href="/services/${s.slug}">${esc(s.name)}</a>`).join('\n  ')}
+  <a href="/services">All Services</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
   <a href="${telHref}" class="btn btn--blue btn--block">${icon('phone')} ${esc(BUSINESS.phone)}</a>
 </div>`;
 }
@@ -238,18 +238,18 @@ function footer(active) {
       <div>
         <h4>Info Link</h4>
         <ul class="footer-links">
-          <li><a href="/contact.html"${on('contact')}>Contact</a></li>
-          <li><a href="/about.html"${on('about')}>About</a></li>
-          <li><a href="/privacy-policy.html"${on('privacy')}>Privacy Policy</a></li>
-          <li><a href="/services.html"${on('services')}>Services</a></li>
-          <li><a href="/contact.html#faq">FAQs</a></li>
+          <li><a href="/contact"${on('contact')}>Contact</a></li>
+          <li><a href="/about"${on('about')}>About</a></li>
+          <li><a href="/privacy-policy"${on('privacy')}>Privacy Policy</a></li>
+          <li><a href="/services"${on('services')}>Services</a></li>
+          <li><a href="/contact#faq">FAQs</a></li>
         </ul>
       </div>
 
       <div>
         <h4>Our Services</h4>
         <ul class="footer-links">
-          ${SERVICES.slice(0, 8).map(s => `<li><a href="/services/${s.slug}.html">${esc(s.name)}</a></li>`).join('\n          ')}
+          ${SERVICES.slice(0, 8).map(s => `<li><a href="/services/${s.slug}">${esc(s.name)}</a></li>`).join('\n          ')}
         </ul>
       </div>
 
@@ -335,7 +335,7 @@ function serviceCards(list) {
         <div class="svc-thumb">${photo(`service-${s.slug}.jpg`, s.name)}</div>
         <h3>${esc(s.name)}</h3>
         <p>${esc(s.short)}</p>
-        <a href="/services/${s.slug}.html" class="btn btn--blue">Learn more</a>
+        <a href="/services/${s.slug}" class="btn btn--blue">Learn more</a>
       </article>`).join('');
 }
 
@@ -444,7 +444,7 @@ ${statsStrip()}
 
     <div class="btn-row is-center" style="margin-top:38px">
       <a href="${telHref}" class="btn btn--blue">${icon('phone')} ${esc(BUSINESS.phone)}</a>
-      <a href="/contact.html" class="btn btn--blue">Request Quote</a>
+      <a href="/contact" class="btn btn--blue">Request Quote</a>
     </div>
   </div>
 </section>
@@ -460,7 +460,7 @@ ${statsStrip()}
     </div>
     <div class="card-grid">${serviceCards(featured)}</div>
     <div class="btn-row is-center" style="margin-top:40px">
-      <a href="/services.html" class="btn btn--blue">See all ${SERVICES.length} services</a>
+      <a href="/services" class="btn btn--blue">See all ${SERVICES.length} services</a>
     </div>
   </div>
 </section>
@@ -546,7 +546,7 @@ ${blueBand()}
 pages['services.html'] = head({
   title: `Our Services | ${BUSINESS.name}`,
   description: `Architectural design, 3D visualization, interior planning and full roofing services across ${BUSINESS.region}.`,
-  canonical: '/services.html',
+  canonical: '/services',
 }) + header('services') + `
 <a id="top"></a>
 <div class="page-head">
@@ -585,7 +585,7 @@ SERVICES.forEach(s => {
   pages[`services/${s.slug}.html`] = head({
     title: `${s.name} in ${BUSINESS.city}, ${BUSINESS.state} | ${BUSINESS.name}`,
     description: s.short,
-    canonical: `/services/${s.slug}.html`,
+    canonical: `/services/${s.slug}`,
     extraHead: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Service',
@@ -599,7 +599,7 @@ SERVICES.forEach(s => {
 <div class="page-head">
   <div class="wrap">
     <h1>${esc(s.name)}</h1>
-    <p class="crumb"><a href="/">Home</a> / <a href="/services.html">Services</a> / ${esc(s.name)}</p>
+    <p class="crumb"><a href="/">Home</a> / <a href="/services">Services</a> / ${esc(s.name)}</p>
   </div>
 </div>
 
@@ -622,18 +622,18 @@ SERVICES.forEach(s => {
 
       <div class="btn-row" style="margin-top:28px">
         <a href="${telHref}" class="btn btn--blue">${icon('phone')} ${esc(BUSINESS.phone)}</a>
-        <a href="/contact.html" class="btn btn--outline">Request a free quote</a>
+        <a href="/contact" class="btn btn--outline">Request a free quote</a>
       </div>
     </div>
 
     <aside class="aside-card">
       <h3>${s.group === 'design' ? 'Design services' : 'Roofing services'}</h3>
       <ul class="aside-list">
-        ${sameGroup.map(x => `<li><a href="/services/${x.slug}.html"${x.slug === s.slug ? ' class="is-active"' : ''}>${esc(x.name)}</a></li>`).join('\n        ')}
+        ${sameGroup.map(x => `<li><a href="/services/${x.slug}"${x.slug === s.slug ? ' class="is-active"' : ''}>${esc(x.name)}</a></li>`).join('\n        ')}
       </ul>
       <h3 style="margin-top:26px">${s.group === 'design' ? 'Roofing services' : 'Design services'}</h3>
       <ul class="aside-list">
-        ${(s.group === 'design' ? ROOFING : DESIGN).map(x => `<li><a href="/services/${x.slug}.html">${esc(x.name)}</a></li>`).join('\n        ')}
+        ${(s.group === 'design' ? ROOFING : DESIGN).map(x => `<li><a href="/services/${x.slug}">${esc(x.name)}</a></li>`).join('\n        ')}
       </ul>
       <a href="${telHref}" class="btn btn--blue btn--block" style="margin-top:22px">${icon('phone')} ${esc(BUSINESS.phone)}</a>
     </aside>
@@ -648,7 +648,7 @@ ${blueBand()}
 pages['about.html'] = head({
   title: `About Us | ${BUSINESS.name}`,
   description: `${BUSINESS.name} provides architectural design, 3D visualization, interior planning and roofing services in ${BUSINESS.city}, ${BUSINESS.state}.`,
-  canonical: '/about.html',
+  canonical: '/about',
 }) + header('about') + `
 <a id="top"></a>
 <div class="page-head">
@@ -694,7 +694,7 @@ pages['about.html'] = head({
         <li><a>Operating since ${BUSINESS.since}</a></li>
         <li><a>${BUSINESS.warrantyYears}-year workmanship warranty</a></li>
       </ul>
-      <a href="/contact.html" class="btn btn--blue btn--block" style="margin-top:22px">Request a free quote</a>
+      <a href="/contact" class="btn btn--blue btn--block" style="margin-top:22px">Request a free quote</a>
     </aside>
   </div>
 </section>
@@ -718,7 +718,7 @@ ${blueBand()}
 pages['contact.html'] = head({
   title: `Contact | Free Quote in ${BUSINESS.city}, ${BUSINESS.state} | ${BUSINESS.name}`,
   description: `Call ${BUSINESS.phone} or send a quote request. Design and roofing services across ${BUSINESS.region}.`,
-  canonical: '/contact.html',
+  canonical: '/contact',
   extraHead: `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -803,7 +803,7 @@ ${blueBand()}
 pages['privacy-policy.html'] = head({
   title: `Privacy Policy | ${BUSINESS.name}`,
   description: `How ${BUSINESS.name} collects, uses and protects the details you send through this website.`,
-  canonical: '/privacy-policy.html',
+  canonical: '/privacy-policy',
 }) + header('privacy') + `
 <a id="top"></a>
 <div class="page-head">
@@ -865,7 +865,7 @@ ${blueBand()}
 pages['404.html'] = head({
   title: `Page not found | ${BUSINESS.name}`,
   description: 'That page does not exist.',
-  canonical: '/404.html',
+  canonical: '/404',
 }) + header('') + `
 <a id="top"></a>
 <section class="section center">
@@ -881,8 +881,8 @@ pages['404.html'] = head({
 </section>
 ` + footer('');
 
-const urls = ['/', '/services.html', '/about.html', '/contact.html', '/privacy-policy.html']
-  .concat(SERVICES.map(s => `/services/${s.slug}.html`));
+const urls = ['/', '/services', '/about', '/contact', '/privacy-policy']
+  .concat(SERVICES.map(s => `/services/${s.slug}`));
 
 pages['sitemap.xml'] = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
